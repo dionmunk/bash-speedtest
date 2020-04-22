@@ -37,5 +37,14 @@ echo "Ping =  $ping ms"
 echo "Download = $download Mbps"
 echo "Upload =  $upload Mbps"
 
+# if history file does not exist
+if [ ! -f "speedtest_history.csv" ]; then
+    # create the file and put a header in it
+    echo "\"timestamp\",\"ip\",\"ping\",\"download\",\"upload\"" > speedtest_history.csv
+fi
+
 # write data to csv file
 echo "$timestamp,$ip,$ping,$download,$upload" >> speedtest_history.csv
+
+# cleanup
+rm speedtest_output.log
